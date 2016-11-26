@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Kinvey Quick Launcher</title>
+</head>
+
+<body>
+
+    <div class="container" ng-app="app" ng-controller="MainController">
+        <input type="text" ng-keyup="filter($event)" ng-model="input">
+        <br><br>
+        <ul ng-repeat="c in components">
+            <li>
+                <a href="{{c.url}}">{{c.name}}</a>
+                <ul ng-repeat="b in c.business_logic">
+                    <a href="{{b.url}}">{{b.name}}</a>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Vendor -->
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/angular/angular.min.js"></script>
+
+    <!-- App -->
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

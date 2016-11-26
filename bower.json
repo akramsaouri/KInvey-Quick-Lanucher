@@ -1,0 +1,21 @@
+{
+  "name": "KQL",
+  "authors": [
+    "Akram <akram@hiddenfounders.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.9",
+    "jquery": "^3.1.1"
+  }
+}
