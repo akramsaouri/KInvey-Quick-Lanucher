@@ -7,28 +7,21 @@ var config = {
 
 
 var components = [{
-        "collection": "profiles",
-        "business_logic": ["onPostFetch"]
-    }, {
-        "collection": "countries",
-        "business_logic": []
-    }, {
-        "collection": "retailors",
-        "business_logic": ["onPreFetch"]
-    },
-
-    {
-        "collection": "publicPrices",
-        "business_logic": ["onPreFetch"]
-    },
-
-    {
-        "collection": "phoneNumbers",
-        "business_logic": []
-    },
-
-    {
-        "collection": "orderChanges",
-        "business_logic": ["onPreFetch"]
-    }
-];
+    "collection": "profiles",
+    "business_logics": ["onPostFetch"]
+}, {
+    "collection": "countries",
+    "business_logics": []
+}, {
+    "collection": "retailors",
+    "business_logics": ["onPreFetch"]
+}, {
+    "collection": "publicPrices",
+    "business_logics": ["onPreFetch"]
+}, {
+    "collection": "phoneNumbers",
+    "business_logics": []
+}, {
+    "collection": "orderChanges",
+    "business_logics": ["onPreFetch"]
+}];

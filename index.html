@@ -11,13 +11,9 @@
     <div class="container" ng-app="app" ng-controller="MainController">
         <input type="text" ng-keyup="filter($event)" ng-model="input">
         <br><br>
-        <ul ng-repeat="c in components">
-            <li>
-                <a href="{{c.url}}">{{c.name}}</a>
-                <ul ng-repeat="b in c.business_logic">
-                    <a href="{{b.url}}">{{b.name}}</a>
-                </ul>
-            </li>
+        <a href="{{component.url}}">{{component.name}}</a>
+        <ul ng-repeat="bl in component.business_logics">
+            <a href="{{bl.url}}">{{bl.name}}</a>
         </ul>
     </div>
 

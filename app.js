@@ -1,53 +1,39 @@
 (function() {
-    angular.module('app', []);
-})();
-
-(function() {
 
     var MainController = ['$scope', function($scope) {
 
         $scope.filter = function(e) {
             if (e.which !== 13) return;
-            $scope.components = execCommand($scope.input);
+            $scope.component = execCommand($scope.input);
         };
 
     }];
 
-    angular.module('app').controller('MainController', MainController);
+    angular.module('app', []).controller('MainController', MainController);
 
 })();
-
 
 /**
  * [execCommand check if command is a valid component description then execute it]
  * @param  {string} input
- * @return {array} components [matching the pattern]
+ * @return {object} component [matching the pattern]
  */
 function execCommand(input) {
     if (!input) return null;
+
+    // extract environment and collection name
     input = input.split(":");
+
     var environment = getEnvironment(input[0]);
     if (environment === null) return null;
-    var components = getComponents(input[1]);
-    if (components.length === 0) return null;
-    return components.map(function(c) {
-        c.business_logic = c.business_logic.map(function(b) {
-            var name = b;
-            b = {};
-            b.url = config.BASE + "/" + config[environment] + "/business-logic/collections/" + c.collection + "/" + name + "/editor";
-            b.name = name;
-            return b;
 
-        });
-        c.url = config.BASE + "/" + config[environment] + "/data/collection/" + c.collection;
-        c.name = c.collection;
-        return c;
-    });
+    var collection = input[1];
+    return getComponent(collection,environment) || null;
 }
 
 /**
- * [getEnvironment map environment to short version]
- * @param  {string} char
+ * [getEnvironment map human/short version to real version]
+ * @param  {string} letter
  * @return {string} environment
  */
 function getEnvironment(letter) {
@@ -66,16 +52,37 @@ function getEnvironment(letter) {
 }
 
 /**
- * [getComponents get components from global variable]
+ * [getComponent find component then attach links to it]
  * @param  {string} collection
+ * @param {string} environment
  * @return {object} component
  */
-function getComponents(collection) {
-    var matches = components.map(function(c) {
-            return (c.collection.indexOf(collection) > -1) ? c : null;
-        })
-        .filter(function(c) {
-            return c !== null;
-        });
-    return matches;
+function getComponent(collection,environment) {
+
+    var component = components.find(function(c) {
+        return c.collection === collection;
+    });
+
+    var BASE = config.BASE + "/" + config[environment];
+
+    // attach link to business logics name
+    component.business_logics = component.business_logics.map(function(bl) {
+
+            // store name
+            var name = bl;
+
+            // attach link to bl
+            bl = {};
+            bl.url = BASE + "/business-logic/collections/" + component.collection + "/" + name + "/editor";
+            bl.name = name;
+
+            return bl;
+    });
+
+
+    // attach link to collection name
+    component.url = BASE + "/data/collection/" + component.collection;
+    component.name = component.collection;
+
+    return component;
 }
