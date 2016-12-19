@@ -35,23 +35,22 @@ function execCommand(input) {
 }
 
 /**
- * [getEnvironment map human/short version to real version]
- * @param  {string} letter
+ * [getEnvironment map human/short version to kid version]
+ * @param  {string} name
  * @return {string} environment
  */
-function getEnvironment(letter) {
-    switch (letter.toLowerCase()) {
-        case "dev":
-            return "Development";
-        case "uat":
-            return "UAT";
-        case "prod":
-            return "Production";
-        case "a":
-            return "All"; // TODO: All
-        default:
-            return null;
-    }
+function getEnvironment(name) {
+    var environments = {
+        dev: "kid_Zk-fAAEhwg",
+        uat: "kid_Hy7Pxmhs",
+        prod: "kid_Z1EUc88ual"
+    };
+
+    name = name.toLowerCase();
+
+    if (name === 'all') console.log('here all'); // TODO: all
+
+    var environment = environments['name'] || null;
 }
 
 /**
@@ -61,6 +60,7 @@ function getEnvironment(letter) {
  * @return {object} component
  */
 function getComponent(collection, environment) {
+    collection = collection.toLowerCase();
 
     var component = components.find(function(c) {
         return c.collection === collection;
@@ -68,7 +68,7 @@ function getComponent(collection, environment) {
 
     if (!component) return null;
 
-    var BASE = config.BASE + "/" + config[environment];
+    var BASE_URL = BASE_URL + "/" + environment;
 
     // attach link to business logics name
     component.business_logics = component.business_logics.map(function(bl) {
@@ -78,14 +78,14 @@ function getComponent(collection, environment) {
 
         // attach link to bl
         bl = {};
-        bl.url = BASE + "/business-logic/collections/" + component.collection + "/" + name + "/editor";
+        bl.url = BASE_URL + "/business-logic/collections/" + component.collection + "/" + name + "/editor";
         bl.name = name;
 
         return bl;
     });
 
     // attach link to collection name
-    component.url = BASE + "/data/collection/" + component.collection;
+    component.url = BASE_URL + "/data/collection/" + component.collection;
     component.name = component.collection;
 
     return component;
@@ -98,3 +98,25 @@ function getComponent(collection, environment) {
  * TODO : background
  * TODO : styling
  */
+
+var BASE_URL = "https://se-console.kinvey.com/environments";
+
+var components = [{
+    "collection": "profiles",
+    "business_logics": ["onPostFetch"]
+}, {
+    "collection": "countries",
+    "business_logics": []
+}, {
+    "collection": "retailors",
+    "business_logics": ["onPreFetch"]
+}, {
+    "collection": "publicPrices",
+    "business_logics": ["onPreFetch"]
+}, {
+    "collection": "phoneNumbers",
+    "business_logics": []
+}, {
+    "collection": "orderChanges",
+    "business_logics": ["onPreFetch"]
+}];
