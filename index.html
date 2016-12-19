@@ -4,17 +4,28 @@
 <head>
     <meta charset="utf-8">
     <title>Kinvey Quick Launcher</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 </head>
 
 <body>
 
-    <div class="container" ng-app="app" ng-controller="MainController">
+    <!-- <div class="container" ng-app="app" ng-controller="MainController">
         <input type="text" ng-keyup="filter($event)" ng-model="input" autofocus>
         <br><br>
-        <a href="{{component.url}}">{{component.name}}</a>
-        <ul ng-repeat="bl in component.business_logics">
-            <li><a href="{{bl.url}}">{{bl.name}}</a></li>
-        </ul>
+    </div> -->
+
+    <div class="box" ng-app="app" ng-controller="MainController">
+        <div class="container-1">
+            <span class="icon"><i class="fa fa-search"></i></span>
+            <input type="search" id="search" ng-keyup="filter($event)" ng-model="input" placeholder="Search..." />
+        </div>
+        <div class="results">
+            <label href="{{component.url}}">{{component.name}}</label>
+            <ul ng-repeat="bl in component.business_logics">
+                <li>{{bl.name}}</li>
+            </ul>
+        </div>
     </div>
 
     <!-- Vendor -->
