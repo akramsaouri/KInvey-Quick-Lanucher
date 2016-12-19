@@ -9,11 +9,11 @@
 <body>
 
     <div class="container" ng-app="app" ng-controller="MainController">
-        <input type="text" ng-keyup="filter($event)" ng-model="input">
+        <input type="text" ng-keyup="filter($event)" ng-model="input" autofocus>
         <br><br>
         <a href="{{component.url}}">{{component.name}}</a>
         <ul ng-repeat="bl in component.business_logics">
-            <a href="{{bl.url}}">{{bl.name}}</a>
+            <li><a href="{{bl.url}}">{{bl.name}}</a></li>
         </ul>
     </div>
 

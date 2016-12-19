@@ -4,6 +4,7 @@
 
         $scope.filter = function(e) {
             if (e.which !== 13) return;
+
             $scope.component = execCommand($scope.input);
         };
 
@@ -28,7 +29,9 @@ function execCommand(input) {
     if (environment === null) return null;
 
     var collection = input[1];
-    return getComponent(collection,environment) || null;
+    if (!collection) return null;
+
+    return getComponent(collection, environment);
 }
 
 /**
@@ -57,28 +60,29 @@ function getEnvironment(letter) {
  * @param {string} environment
  * @return {object} component
  */
-function getComponent(collection,environment) {
+function getComponent(collection, environment) {
 
     var component = components.find(function(c) {
         return c.collection === collection;
     });
+
+    if (!component) return null;
 
     var BASE = config.BASE + "/" + config[environment];
 
     // attach link to business logics name
     component.business_logics = component.business_logics.map(function(bl) {
 
-            // store name
-            var name = bl;
+        // store name
+        var name = (typeof bl === 'string') ? bl : bl.name;
 
-            // attach link to bl
-            bl = {};
-            bl.url = BASE + "/business-logic/collections/" + component.collection + "/" + name + "/editor";
-            bl.name = name;
+        // attach link to bl
+        bl = {};
+        bl.url = BASE + "/business-logic/collections/" + component.collection + "/" + name + "/editor";
+        bl.name = name;
 
-            return bl;
+        return bl;
     });
-
 
     // attach link to collection name
     component.url = BASE + "/data/collection/" + component.collection;
@@ -86,3 +90,11 @@ function getComponent(collection,environment) {
 
     return component;
 }
+
+
+/**
+ * TODO : duplicate li
+ * TODO : all components
+ * TODO : background
+ * TODO : styling
+ */
