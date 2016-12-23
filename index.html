@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <title>Kinvey Quick Launcher</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -13,12 +13,12 @@
     <div class="box" ng-app="app" ng-controller="MainController">
         <div class="container-1">
             <span class="icon"><i class="fa fa-search"></i></span>
-            <input type="search" id="search" ng-keyup="filter($event)" ng-model="input" placeholder="Search..."  autofocus/>
+            <input type="search" id="search" ng-keyup="filter($event)" ng-model="input" placeholder="Search..." autofocus/>
         </div>
         <div class="results">
-            <label href="{{component.url}}">{{component.name}}</label>
+            <a href="{{component.url}}">{{component.name}}</a>
             <ul ng-repeat="bl in component.business_logics">
-                <li>{{bl.name}}</li>
+                <li><a href="{{bl.url}}">{{bl.name}}</a></li>
             </ul>
         </div>
     </div>

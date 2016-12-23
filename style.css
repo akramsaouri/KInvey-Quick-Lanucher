@@ -66,30 +66,3 @@ body {
     outline: none;
     background: #ffffff;
 }
-
-ul {
-    list-style: none;
-    margin: 0;
-    padding: 5px 20px;
-    width: 100%
-}
-
-ul li {
-    padding: 5px
-}
-
-label {
-    font: bold 12pt Arial;
-}
-
-label:hover {
-    color: #FA6900;
-    cursor: pointer
-}
-
-ul li:hover {
-    color: #fff;
-    cursor: pointer;
-    background: #00BCD1;
-    border-radius: 5px
-}
