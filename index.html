@@ -5,20 +5,15 @@
     <meta charset="utf-8">
     <title>Kinvey Quick Launcher</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.min.css">
 </head>
 
 <body>
 
-    <!-- <div class="container" ng-app="app" ng-controller="MainController">
-        <input type="text" ng-keyup="filter($event)" ng-model="input" autofocus>
-        <br><br>
-    </div> -->
-
     <div class="box" ng-app="app" ng-controller="MainController">
         <div class="container-1">
             <span class="icon"><i class="fa fa-search"></i></span>
-            <input type="search" id="search" ng-keyup="filter($event)" ng-model="input" placeholder="Search..." />
+            <input type="search" id="search" ng-keyup="filter($event)" ng-model="input" placeholder="Search..."  autofocus/>
         </div>
         <div class="results">
             <label href="{{component.url}}">{{component.name}}</label>
@@ -29,8 +24,8 @@
     </div>
 
     <!-- Vendor -->
-    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
     <!-- Vendor -->
 
     <!-- App -->
