@@ -50,7 +50,7 @@ function getEnvironment(name) {
 
     if (name === 'all') console.log('here all'); // TODO: all
 
-    var environment = environments['name'] || null;
+    return environments[name] || null;
 }
 
 /**
@@ -68,7 +68,7 @@ function getComponent(collection, environment) {
 
     if (!component) return null;
 
-    var BASE_URL = BASE_URL + "/" + environment;
+    var URL = BASE_URL + "/" + environment;
 
     // attach link to business logics name
     component.business_logics = component.business_logics.map(function(bl) {
@@ -78,14 +78,14 @@ function getComponent(collection, environment) {
 
         // attach link to bl
         bl = {};
-        bl.url = BASE_URL + "/business-logic/collections/" + component.collection + "/" + name + "/editor";
+        bl.url = URL + "/business-logic/collections/" + component.collection + "/" + name + "/editor";
         bl.name = name;
 
         return bl;
     });
 
     // attach link to collection name
-    component.url = BASE_URL + "/data/collection/" + component.collection;
+    component.url = URL + "/data/collection/" + component.collection;
     component.name = component.collection;
 
     return component;
