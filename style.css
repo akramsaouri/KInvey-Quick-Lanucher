@@ -11,6 +11,7 @@ body {
 
 .container-1 {
     width: 300px;
+    height: 50px;
     vertical-align: middle;
     white-space: nowrap;
     position: relative;
@@ -57,12 +58,52 @@ body {
     position: absolute;
     top: 50%;
     margin-left: 17px;
-    margin-top: 17px;
     z-index: 1;
     color: #4f5b66;
+    transform: translateY(-50%);
 }
 
 .container-1 input#search:hover, .container-1 input#search:focus, .container-1 input#search:active {
     outline: none;
     background: #ffffff;
+}
+
+.results {
+    padding: 20px 0px 0px 30px;
+}
+
+.results a {
+    text-decoration: none;
+    cursor: pointer;
+    color: #ccc
+}
+
+.results a:hover {
+    text-decoration: underline;
+}
+
+.results .bl {
+    list-style: none;
+    padding: 0 0 0 30px;
+    margin: 5px 0;
+}
+
+.results .bl li {
+    margin: 5px 0;
+}
+
+.results ul li a {
+    font-size: 16px
+}
+
+a.component {
+    font-size: 22px;
+    text-transform: capitalize;
+}
+
+a.component .fa {
+    font-size: 10px;
+    margin-right: 7px;
+    position: relative;
+    top: -3px;
 }

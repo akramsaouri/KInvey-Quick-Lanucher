@@ -93,10 +93,7 @@ function getComponent(collection, environment) {
 
 
 /**
- * TODO : duplicate li
  * TODO : all components
- * TODO : background
- * TODO : styling
  */
 
 var BASE_URL = "https://se-console.kinvey.com/environments";
