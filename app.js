@@ -60,7 +60,7 @@ function getEnvironment(name) {
  * @return {object} component
  */
 function getComponent(collection, environment) {
-    collection = collection.toLowerCase();
+//    collection = collection.toLowerCase();
 
     var component = components.find(function(c) {
         return c.collection === collection;
