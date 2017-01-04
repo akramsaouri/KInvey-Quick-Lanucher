@@ -1,17 +1,33 @@
-(function() {
+var config;
 
-    var MainController = ['$scope', function($scope) {
+(function() {
+    var url = 'https://gist.githubusercontent.com/akramsaouri/f947115549a0b041b94fe407b5b4f273/raw/0368c5a778a8e9359a7d2d0dfa1e7d8ee6838645/kql.json';
+    var MainController = ['$scope', '$http', function($scope, $http) {
+
+        (function() {
+            // NOTE
+            $scope.input = "dev:profiles"
+                // fetch kql config
+            $http.get(url)
+                .then(function(res) {
+                    config = res.data;
+                    // TODO: save in local
+                })
+                .catch(function(err) {
+                    console.log(err);
+                    return alert("error while fetching kql file")
+                })
+        })();
 
         $scope.filter = function(e) {
             if (e.which !== 13) return;
-
+            if (config === undefined || config === null) return;
             $scope.component = execCommand($scope.input);
         };
 
     }];
 
     angular.module('app', []).controller('MainController', MainController);
-
 })();
 
 /**
@@ -20,100 +36,77 @@
  * @return {object} component [matching the pattern]
  */
 function execCommand(input) {
-    if (!input) return null;
+    if (!input) return;
 
-    // extract environment and collection name
     input = input.split(":");
 
     var environment = getEnvironment(input[0]);
-    if (environment === null) return null;
+    if (environment === null) return;
 
-    var collection = input[1];
-    if (!collection) return null;
+    var component = getComponent(input[1]);
+    if (component === null) return;
 
-    return getComponent(collection, environment);
+    var links = buildLinks(environment, component);
+    console.log(links);
+
+    if (links === null) return;
+    return links
 }
 
-/**
- * [getEnvironment map human/short version to kid version]
- * @param  {string} name
- * @return {string} environment
- */
-function getEnvironment(name) {
-    var environments = {
-        dev: "kid_Zk-fAAEhwg",
-        uat: "kid_Hy7Pxmhs",
-        prod: "kid_Z1EUc88ual"
-    };
-
-    name = name.toLowerCase();
-
-    if (name === 'all') console.log('here all'); // TODO: all
-
-    return environments[name] || null;
+function getEnvironment(environment) {
+    try {
+        return config.environments.find(e => e.name === environment).kid
+    } catch (e) {
+        return null;
+    }
 }
 
-/**
- * [getComponent find component then attach links to it]
- * @param  {string} collection
- * @param {string} environment
- * @return {object} component
- */
-function getComponent(collection, environment) {
-//    collection = collection.toLowerCase();
-
-    var component = components.find(function(c) {
-        return c.collection === collection;
-    });
-
-    if (!component) return null;
-
-    var URL = BASE_URL + "/" + environment;
-
-    // attach link to business logics name
-    component.business_logics = component.business_logics.map(function(bl) {
-
-        // store name
-        var name = (typeof bl === 'string') ? bl : bl.name;
-
-        // attach link to bl
-        bl = {};
-        bl.url = URL + "/business-logic/collections/" + component.collection + "/" + name + "/editor";
-        bl.name = name;
-
-        return bl;
-    });
-
-    // attach link to collection name
-    component.url = URL + "/data/collection/" + component.collection;
-    component.name = component.collection;
-
-    return component;
+function getComponent(component) {
+    var exists = config.collections.find(k => k.name === component)
+    if (exists) return {
+        type: "collection",
+        component: exists
+    }
+    exists = config.endpoints.find(k => k === component)
+    if (exists) return {
+        type: "endpoint",
+        component: exists
+    }
+    exists = config.commons.find(k => k === component)
+    if (exists) return {
+        type: "common",
+        component: exists
+    }
+    return null;
 }
 
+function buildLinks(environment, component) {
+    var url = config.url + "/" + environment;
+    var type = component.type;
+    component = component.component;
+    switch (type) {
+        case 'collection':
+            return {
+                name: component.name,
+                url: url + "/data/collection//" + component.name,
+                bls: component.bls.map(function(k) {
+                    return {
+                        name: k,
+                        url: url + "/business-logic/collections/" + component.name + "/" + k + "/editor"
+                    }
+                })
+            }
+        case 'endpoint':
+            return {
+                name: component,
+                url: url + "/business-logic/endpoint/" + component + "/editor"
 
-/**
- * TODO : all components
- */
+            }
+        case 'common':
+            return {
+                name: component,
+                url: url + "/business-logic/common/" + component + "/editor"
 
-var BASE_URL = "https://se-console.kinvey.com/environments";
-
-var components = [{
-    "collection": "profiles",
-    "business_logics": ["onPostFetch"]
-}, {
-    "collection": "countries",
-    "business_logics": []
-}, {
-    "collection": "retailors",
-    "business_logics": ["onPreFetch"]
-}, {
-    "collection": "publicPrices",
-    "business_logics": ["onPreFetch"]
-}, {
-    "collection": "phoneNumbers",
-    "business_logics": []
-}, {
-    "collection": "orderChanges",
-    "business_logics": ["onPreFetch"]
-}];
+            }
+    }
+}
