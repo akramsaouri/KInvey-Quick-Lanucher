@@ -6,12 +6,11 @@ var config;
 
         (function() {
             // NOTE
-            $scope.input = "dev:profiles"
-                // fetch kql config
+            // $scope.input = "dev:profiles"
+            // fetch kql config
             $http.get(url)
                 .then(function(res) {
                     config = res.data;
-                    // TODO: save in local
                 })
                 .catch(function(err) {
                     console.log(err);
