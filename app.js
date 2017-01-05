@@ -1,7 +1,7 @@
 var config;
 
 (function() {
-    var url = 'https://gist.githubusercontent.com/akramsaouri/f947115549a0b041b94fe407b5b4f273/raw/0368c5a778a8e9359a7d2d0dfa1e7d8ee6838645/kql.json';
+    var url = 'https://gist.githubusercontent.com/akramsaouri/f947115549a0b041b94fe407b5b4f273/raw/d172b61dce928476e38cc48526608d25451d7731/kql.json';
     var MainController = ['$scope', '$http', function($scope, $http) {
 
         (function() {
