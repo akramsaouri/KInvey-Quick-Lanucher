@@ -87,7 +87,7 @@ function buildLinks(environment, component) {
         case 'collection':
             return {
                 name: component.name,
-                url: url + "/data/collection//" + component.name,
+                url: url + "/data/collection/" + component.name,
                 bls: component.bls.map(function(k) {
                     return {
                         name: k,
