@@ -1,2 +1,2 @@
-# Kinvey-Quick-Launcher
-Kinvey Fuzzy Finder Chrome extension
+# kinvey-quick-launcher
+Kinvey-quick-launcher
