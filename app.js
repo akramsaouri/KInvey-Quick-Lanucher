@@ -1,12 +1,10 @@
 var config;
 
 (function() {
-    var url = 'https://gist.githubusercontent.com/akramsaouri/f947115549a0b041b94fe407b5b4f273/raw/d172b61dce928476e38cc48526608d25451d7731/kql.json';
+    var url = 'https://gist.githubusercontent.com/akramsaouri/f947115549a0b041b94fe407b5b4f273/raw';
     var MainController = ['$scope', '$http', function($scope, $http) {
 
         (function() {
-            // NOTE
-            // $scope.input = "dev:profiles"
             // fetch kql config
             $http.get(url)
                 .then(function(res) {
@@ -14,7 +12,6 @@ var config;
                 })
                 .catch(function(err) {
                     console.log(err);
-                    return alert("error while fetching kql file")
                 })
         })();
 
@@ -46,7 +43,6 @@ function execCommand(input) {
     if (component === null) return;
 
     var links = buildLinks(environment, component);
-    console.log(links);
 
     if (links === null) return;
     return links
