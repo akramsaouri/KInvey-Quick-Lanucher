@@ -1,7 +1,7 @@
 var config;
 
 (function() {
-    var url = 'https://gist.githubusercontent.com/akramsaouri/f947115549a0b041b94fe407b5b4f273/raw';
+     var url = 'https://gist.githubusercontent.com/akramsaouri/f947115549a0b041b94fe407b5b4f273/raw';
     var MainController = ['$scope', '$http', function($scope, $http) {
 
         (function() {
