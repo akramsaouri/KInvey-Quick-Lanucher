@@ -1,2 +1,2 @@
-# kinvey-quick-launcher
-Kinvey-quick-launcher
+# kql
+Kinvey Quick Launcher
