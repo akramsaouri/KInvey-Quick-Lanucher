@@ -16,7 +16,7 @@
             <input type="search" id="search" ng-keyup="filter($event)" ng-model="input" placeholder="Search..." autofocus/>
         </div>
         <div class="results">
-            <a class="component" href="{{component.url}}" target="_blank" ng-hide="!component">
+            <a class="component" href="{{component.url}}" ng-hide="!component">
                 <span class="fa fa-chevron-right"></span>{{component.name}}
             </a>
             <ul class="bl" ng-repeat="bl in component.bls">

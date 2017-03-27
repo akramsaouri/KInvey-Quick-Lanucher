@@ -83,24 +83,24 @@ function buildLinks(environment, component) {
         case 'collection':
             return {
                 name: component.name,
-                url: url + "/data/collection/" + component.name,
+                url: url + "/data/collections/" + component.name,
                 bls: component.bls.map(function(k) {
                     return {
                         name: k,
-                        url: url + "/business-logic/collections/" + component.name + "/" + k + "/editor"
+                        url: url + "/bl/hooks/" + component.name + "/" + k
                     }
                 })
             }
         case 'endpoint':
             return {
                 name: component,
-                url: url + "/business-logic/endpoint/" + component + "/editor"
+                url: url + "/bl/endpoints/" + component
 
             }
         case 'common':
             return {
                 name: component,
-                url: url + "/business-logic/common/" + component + "/editor"
+                url: url + "/bl/common/" + component
 
             }
     }
